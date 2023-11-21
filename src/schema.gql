@@ -1,0 +1,26 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Users {
+  id: ID!
+  firstName: String!
+  lastName: String!
+  email: String!
+}
+
+type Query {
+  findOneById(id: Int!): Users!
+  findAll: [Users!]!
+}
+
+type Mutation {
+  create(newUserData: NewUsersInput!): Users!
+  delete(id: Float!): Boolean!
+}
+
+input NewUsersInput {
+  firstName: String!
+  lastName: String!
+  email: String!
+}
