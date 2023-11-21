@@ -23,7 +23,7 @@ query{
 }
 
 mutation{
-  create(newUserData: {firstName: "Guiii", lastName: "testeeee", email: "gui@gmail.com"}){
+  create(newUserData: {firstName: "Teste", lastName: "testeeee", email: "teste@gmail.com"}){
     id,
     firstName,
     lastName,
