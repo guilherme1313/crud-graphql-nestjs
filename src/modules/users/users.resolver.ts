@@ -3,6 +3,7 @@ import { UsersService } from './users.service';
 import { NotFoundException } from '@nestjs/common';
 import { NewUsersInput } from './dtos/create-user.input';
 import { Users } from './entities/users.entity';
+import { UpdateUsersInput } from './dtos/update-user.input';
 
 @Resolver(of => Users)
 export class UsersResolver {
@@ -23,6 +24,11 @@ export class UsersResolver {
   @Mutation(returns => Users)
   async create(@Args('newUserData') newUserData: NewUsersInput) {
     return await this._usersService.create(newUserData);
+  }
+
+  @Mutation(returns => Users)
+  async update(@Args('id') id: number, @Args('updateUserData') updateUserData: UpdateUsersInput) {
+    return await this._usersService.update(id, updateUserData);
   }
 
   @Mutation(returns => Boolean)

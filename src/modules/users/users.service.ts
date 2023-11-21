@@ -2,6 +2,7 @@ import { Injectable, BadRequestException, NotFoundException } from '@nestjs/comm
 import { NewUsersInput } from './dtos/create-user.input';
 import { Users } from './entities/users.entity';
 import { InjectModel } from '@nestjs/sequelize';
+import { UpdateUsersInput } from './dtos/update-user.input';
 
 @Injectable()
 export class UsersService{
@@ -45,6 +46,34 @@ export class UsersService{
         } else {
           throw new BadRequestException('Erro ao cadastrar usuário, tente novamente!');
         }
+       } catch (error) {
+        throw new BadRequestException(error.message);
+       }
+    }
+
+    async update(id: number, updateUserData: UpdateUsersInput){
+       try {
+            const exist = await this._users.findOne({
+              where: {
+                  id
+              }
+          });
+      
+          if(!exist){
+              throw new BadRequestException('Usuário não encontrado!');
+          }
+      
+          const save = await exist.update(updateUserData, {
+            where: {
+              id
+            }
+          });
+      
+          if (save) {
+            return save;
+          } else {
+            throw new BadRequestException('Erro ao editar usuário, tente novamente!');
+          }
        } catch (error) {
         throw new BadRequestException(error.message);
        }
